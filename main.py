@@ -1,5 +1,6 @@
 def main():
-    pass
+    while True:
+        playRanked(0,False)
 
 def playRanked(lp,mentally_sane):
     lp -= 20
