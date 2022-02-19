@@ -1,0 +1,63 @@
+html, body {
+    margin: 0px;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #161616;
+    color: white;
+    padding: 1rem;
+    align-items: baseline;
+}
+
+header h1 {
+    font-size: 1.5rem;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+}
+
+header nav {
+    margin-left: 2rem;
+}
+
+header nav a {
+    transition: all;
+    transition-duration: 0.5s;
+    padding: 0.2rem;
+}
+
+header nav a:hover {
+    color: aquamarine;
+    padding: 0.2rem;
+}
+
+main {
+    padding: 1rem;
+}
+
+.textinput {
+    position: relative;
+    width: 85%;
+    height: 20rem;
+    resize: none;
+    font-family: inherit;
+}
+
+.bloginput {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.content {
+    padding: 1rem;
+}
