@@ -14,7 +14,8 @@
 {% block content %}
 <div class="bloglistings">
     {% for post in g.posts %}
-        <a href={{"/blog/"+post["id"]}}>{{ post["title"] }}</div>
+        <a href={{"/blog/"+post["id"]}}>{{ post["title"] }}</a>
+        <p>{{ post["description"] }}</p>
     {% endfor %}
 </div>
 {% endblock %}
