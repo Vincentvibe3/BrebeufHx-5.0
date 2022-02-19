@@ -1,41 +1,7 @@
 [
     {
-        "title": "test 1",
-        "id": "1645298089"
-    },
-    {
-        "title": "test 1",
-        "id": "1645298172"
-    },
-    {
-        "title": "test",
-        "id": "1645309243",
-        "description": "test"
-    },
-    {
-        "title": "test",
-        "id": "1645311182",
-        "description": "test"
-    },
-    {
-        "title": "Test Blog",
-        "id": "1645311254",
-        "description": "Lorem Ipsum"
-    },
-    {
-        "title": "123123",
-        "id": "1645312377",
-        "description": "123123123",
-        "user": "jason"
-    },
-    {
-        "title": "123123",
-        "id": "1645312433",
-        "description": "123123qwdq3reqwe"
-    },
-    {
-        "title": "asdlkj;",
-        "id": "1645312480",
-        "description": "sdfjkl;"
+        "title": "Test blog",
+        "id": "1645312788",
+        "description": "short description"
     }
 ]
