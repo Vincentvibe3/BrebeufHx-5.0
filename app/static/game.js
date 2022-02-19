@@ -1,15 +1,15 @@
-const start =  {
+const start_page =  {
     x: 0,
     y: 0,
-    image: show('intro_image'),
-    text: fade('intro_message'),
+    image: show,
+    text: fade,
     top: 'free',
     bottom: 'free',
     left: 'free',
     right: 'free'
 }
 
-document.getElementById("Start_button").addEventListener('click', start)
+
 var x_position = 0
 var y_position = 0
 
@@ -30,12 +30,14 @@ function east() {
 }
 
 function start() {
-    start.image;
-    start.text;
+    start_page.image('intro_image');
+    start_page.text('intro_message');
 }
 
 function show(element_ID) {
+    console.log(element_ID)
     var x = document.getElementById(element_ID);
+    console.log(x)
     if (x.style.display === "none") {
       x.style.display = "block";
     } else {
@@ -56,3 +58,5 @@ async function fade(element_ID) {
         await new Promise(r => setTimeout(r, 100));
     }
 }
+
+document.getElementById("Start_button").addEventListener("click", start)
