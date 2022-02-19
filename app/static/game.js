@@ -23,7 +23,16 @@ let scenariodata = [
     {
         "framecount":[4, 8, 8, 8, 8, 8, 8],
         "animationcount":7,
-        "script":`abcd`
+        "script":`
+        This is Jason.<br>
+        Jason lost his mother at the age of 3. His father takes care of him <br>
+        His father is alcoholic and hits him when Jason misbehaves. <br>
+        Jason is responsible for buying groceries and washing the dishes. He is often sent to buy more alcohol bottles for his father. <br>
+        Because of this, he doesn't have a lot of time to do his homework and he hides the bruises on his body from his classmates.<br>
+        Jason does not feel like his home is a home.<br>
+        In a majority of countries, more than 2 in 3 children are subjected to violent discipline by caregivers. <br>
+        - UNICEF, August 2021
+        `
     }
 ]
 let scenario = 1
@@ -31,6 +40,7 @@ let draw = false
 
 function setupTypeWrite(scene) {
     pos = 0;
+    typing = false
     text = scenariodata[scene-1]["script"];
     textField.innerHTML = '';
     typing = true;
@@ -107,7 +117,6 @@ async function setScenario1(){
     animation = 1
     console.log(scenario)
     start()
-    typing = false
     setupTypeWrite(1)
 }
 
@@ -117,7 +126,6 @@ async function setScenario2(){
     animation = 1
     console.log(scenario)
     start()
-    typing = false
     setupTypeWrite(2)
 }
 
