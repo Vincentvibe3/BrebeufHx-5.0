@@ -1,27 +1,25 @@
 import json
 
 from argon2.exceptions import VerifyMismatchError
-from flask import (
-    Blueprint, request, g
-)
-from json import *
-from flask import render_template
 from argon2 import PasswordHasher
+from flask import Blueprint, request, g, render_template
 from werkzeug.utils import redirect
 
 bp = Blueprint('index', __name__, url_prefix='/')
 hasher = PasswordHasher()
 
-
 @bp.route("/auth/", methods=["POST", "GET"])
 def auth():
     if request.method == "POST":
+        try:
+            form_user = request.form["user"]
+            form_pass = request.form["pass"]
+        except KeyError:
+            return "MissingField"
         with open("app/static/passwords.json", "r") as DB_pre:
             DB = json.loads(DB_pre.read())
-        form_user = request.form["user"]
-        form_pass = request.form["pass"]
-        if form_user == "" or form_pass == "":
-            return "FieldIsNone"
+            if form_user not in DB:
+                return "NoExistingUser"
         try:
             hasher.verify(DB[form_user], form_pass)
         except VerifyMismatchError:
@@ -29,27 +27,32 @@ def auth():
         else:
             return "RightPassword" # Redirect to initial location?
     else:
-        return "<h1>ASDASDASD</h1>"
+        return "<h1>AUTHPAGE</h1>"
 
 
 @bp.route("/register/", methods=["POST", "GET"])
 def register():
     if request.method == "POST":
-        form_IGN = request.form["user"]
-        form_Pass = hasher.hash(request.form["pass"])
+        try:
+            form_User = request.form["user"]
+            form_Pass = hasher.hash(request.form["pass"])
+        except KeyError:
+            return "MissingField"
+        if form_User == "" or form_Pass == "":
+            return "MissingField"
         with open("app/static/passwords.json", "r") as file:
-            data = json.load(file)
-            if form_IGN not in data:
-                data[form_IGN] = form_Pass
+            DB = json.load(file)
+            if form_User not in DB:
+                DB[form_User] = form_Pass
             else:
-                data["ERROR"] = "Errored123"
+                return "ExistingUser"
         with open("app/static/passwords.json", "w") as file:
-            json.dump(data, file, indent=4)
-        return redirect("/") # Redirect to initial location
+            json.dump(DB, file, indent=4)
+        return redirect("/") # Redirect to initial location + No errors
     else:
-        return "<h1>Resgister form</h1>"
+        return "<h1>REGISTER PAGE</h1>"
 
 
 @bp.route("", methods=["GET"])
 def index():
-    return "OKAY"
+    return "<h1>MAIN PAGE<h1>"
