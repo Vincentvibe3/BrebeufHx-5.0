@@ -82,6 +82,3 @@ def register():
     else:
         return render_template("login.html")
 
-@bp.route("/cookie", methods=["POST", "GET"])
-def cookie():
-    return request.cookies.get("userID")
