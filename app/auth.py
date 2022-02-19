@@ -51,6 +51,7 @@ def login():
             sessions.append(sessId)
             resp = make_response(redirect("/blog/submit", 302))
             resp.set_cookie('userID', sessId, httponly=True, secure=True)
+            resp.set_cookie("userName", form_user)
             return resp  # Redirect to initial location?
 
     else:
@@ -80,6 +81,7 @@ def register():
         sessions.append(sessId)
         resp = make_response(redirect("/blog/submit", 302))
         resp.set_cookie('userID', sessId, httponly=True, secure=True)
+        resp.set_cookie("userName",form_user)
         return resp  # Redirect to initial location + No errors
     else:
         if request.cookies.get("userID") in session_cache.sessions:

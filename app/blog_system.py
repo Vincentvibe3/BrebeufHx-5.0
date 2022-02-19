@@ -34,7 +34,7 @@ def submit():
         title = request.form["titleinput"]
         description = request.form["descriptioninput"]
         with open(f"app/content/{timestamp}.md", "w") as f:
-            f.write(f"# {title}\n#### {description}\n{request.form['textinput']}")
+            f.write(f"# {title}\n#### {description}\n written by {request.cookies.get('userName')}\n\n{request.form['textinput']}")
         with open(f"app/content/index.json", "r") as f:
             index = json.loads(f.read())
         with open(f"app/content/index.json", "w") as f:
