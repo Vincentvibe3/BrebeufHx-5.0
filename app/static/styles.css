@@ -118,3 +118,8 @@ main {
 a:hover {
     color: lightblue;
   }
+
+.logintext {
+    font-size: 30px;
+    margin-bottom: 2rem;
+}
