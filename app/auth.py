@@ -55,7 +55,7 @@ def login():
 
     else:
         if request.cookies.get("userID") in session_cache.sessions:
-            return redirect("/blog/submit")
+            return redirect("/blog")
         return render_template("login.html")
 
 
@@ -83,5 +83,5 @@ def register():
         return resp  # Redirect to initial location + No errors
     else:
         if request.cookies.get("userID") in session_cache.sessions:
-            return redirect("/blog/submit")
+            return redirect("/blog")
         return render_template("login.html")
