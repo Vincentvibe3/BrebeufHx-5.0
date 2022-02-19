@@ -84,4 +84,4 @@ def register():
     else:
         if request.cookies.get("userID") in session_cache.sessions:
             return redirect("/blog")
-        return render_template("login.html")
+        return render_template("register.html")
