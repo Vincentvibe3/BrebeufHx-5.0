@@ -7,11 +7,12 @@ import json
 
 from argon2.exceptions import VerifyMismatchError
 from argon2 import PasswordHasher
-from flask import Blueprint, request, g, render_template
+from flask import Blueprint, request, g, render_template, make_response
 from werkzeug.utils import redirect
 
 bp = Blueprint('index', __name__, url_prefix='/')
 hasher = PasswordHasher()
+
 
 @bp.route("/auth/", methods=["POST", "GET"])
 def auth():
@@ -19,6 +20,8 @@ def auth():
         try:
             form_user = request.form["user"]
             form_pass = request.form["pass"]
+            if form_user == "" or form_pass == "":
+                return "MissingField"
         except KeyError:
             return "MissingField"
         with open("app/static/passwords.json", "r") as DB_pre:
@@ -30,7 +33,10 @@ def auth():
         except VerifyMismatchError:
             return "WrongPassword"
         else:
-            return "RightPassword" # Redirect to initial location?
+            resp = make_response("RightPassword")
+            resp.set_cookie('userID', "userIDed")
+            return resp  # Redirect to initial location?
+
     else:
         return "<h1>AUTHPAGE</h1>"
 
@@ -41,19 +47,18 @@ def register():
         try:
             form_User = request.form["user"]
             form_Pass = hasher.hash(request.form["pass"])
+            if form_User == "" or form_Pass == "":
+                return "MissingField"
         except KeyError:
-            return "MissingField"
-        if form_User == "" or form_Pass == "":
             return "MissingField"
         with open("app/static/passwords.json", "r") as file:
             DB = json.load(file)
-            if form_User not in DB:
-                DB[form_User] = form_Pass
-            else:
+            if form_User in DB:
                 return "ExistingUser"
+            DB[form_User] = form_Pass
         with open("app/static/passwords.json", "w") as file:
             json.dump(DB, file, indent=4)
-        return redirect("/") # Redirect to initial location + No errors
+        return redirect("/")  # Redirect to initial location + No errors
     else:
         return "<h1>REGISTER PAGE</h1>"
 
