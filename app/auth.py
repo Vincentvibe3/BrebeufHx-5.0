@@ -47,7 +47,7 @@ def login():
         else:
             sessId = genSessionId()
             sessions.append(sessId)
-            resp = make_response(redirect("/blog", 302))
+            resp = make_response(redirect("/blog/submit", 302))
             resp.set_cookie('userID', sessId, httponly=True, secure=True)
             return resp  # Redirect to initial location?
 
@@ -76,9 +76,11 @@ def register():
             json.dump(DB, file, indent=4)
         sessId = genSessionId()
         sessions.append(sessId)
-        resp = make_response(redirect("/blog", 302))
+        resp = make_response(redirect("/blog/submit", 302))
         resp.set_cookie('userID', sessId, httponly=True, secure=True)
         return resp  # Redirect to initial location + No errors
     else:
+        if request.cookies.get("userID") in session_cache.sessions:
+            return redirect("/blog/submit")
         return render_template("login.html")
 
