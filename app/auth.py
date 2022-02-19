@@ -4,6 +4,8 @@ from flask import (
 )
 import urllib
 
+from . import session_cache
+
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 from .session_cache import sessions
@@ -17,15 +19,18 @@ from werkzeug.utils import redirect
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 hasher = PasswordHasher()
 
+
 def genSessionId():
     tokenbytes = secrets.token_bytes(32)
     b64 = base64.b64encode(tokenbytes)
     token = b64.decode("utf-8")
     return urllib.parse.quote(token)
 
+
 @bp.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
+
         try:
             form_user = request.form["user"]
             form_pass = request.form["pass"]
@@ -44,11 +49,13 @@ def login():
         else:
             sessId = genSessionId()
             sessions.append(sessId)
-            resp = make_response(redirect("/blog", 302))
+            resp = make_response(redirect("/blog/submit", 302))
             resp.set_cookie('userID', sessId, httponly=True, secure=True)
             return resp  # Redirect to initial location?
 
     else:
+        if request.cookies.get("userID") in session_cache.sessions:
+            return redirect("/blog/submit")
         return render_template("login.html")
 
 
@@ -71,8 +78,10 @@ def register():
             json.dump(DB, file, indent=4)
         sessId = genSessionId()
         sessions.append(sessId)
-        resp = make_response(redirect("/blog", 302))
+        resp = make_response(redirect("/blog/submit", 302))
         resp.set_cookie('userID', sessId, httponly=True, secure=True)
         return resp  # Redirect to initial location + No errors
     else:
+        if request.cookies.get("userID") in session_cache.sessions:
+            return redirect("/blog/submit")
         return render_template("login.html")
