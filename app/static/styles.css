@@ -9,35 +9,28 @@ html, body {
 header {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 100vw;
     background-color: #161616;
     color: white;
-    padding: 1rem;
-    align-items: baseline;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
 }
 
 header h1 {
     font-size: 1.5rem;
 }
 
-header aa~ {
+header a {
+    margin-left: 1rem;
     color: white;
     text-decoration: none;
 }
 
 header nav {
+    display: flex;
+    flex-direction: row;
     margin-left: 2rem;
-}
-
-header nav a {
-    transition: all;
-    transition-duration: 0.5s;
-    padding: 0.2rem;
-}
-
-header nav a:hover {
-    color: aquamarine;
-    padding: 0.2rem;
 }
 
 main {
@@ -46,36 +39,38 @@ main {
 
 .textinput {
     position: relative;
-    width: 85%;
-    height: 20rem;
-    resize: none;
-    font-family: inherit;
     border: 1px solid;
-    border-radius: 25px;
-    padding: 15px;
+    height: 12rem;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    font-family: inherit;
     margin-bottom: 1rem;
-}
-
-.blogbutton{
-    background-color: rgb(202, 255, 202);
-    border-radius: 5px;
-    border: 1px solid
+    resize: none;
 }
 
 .titleinput{
     position: relative;
-    border: 3px solid;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 1rem
+    border: 1px solid;
+    height: 1rem;
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    font-family: inherit;
+    margin-bottom: 1rem;
+    resize: none;
     
 }
 
 .bloginput {
-    width: 100%;
+    position: relative;
+    margin: 1rem;
+    width: 80%;
     display: flex;
-    align-items: center;
+    align-items: left;
     flex-direction: column;
+}
+
+.bloginput label {
+    margin: 0.5rem;
 }
 
 .content {
@@ -88,11 +83,10 @@ main {
 }
 
 .loginnav {
-    margin-left: 63%;
-    float: right;
     display: flex;
     flex-direction: row;
-    
+    position: absolute;
+    right: 2rem;
 }
 
 .auth {
@@ -106,7 +100,7 @@ main {
 }
 
 .homelink{
-    font-size: 30px;
+    font-size: 2rem;
     color: white;
     text-decoration: none;
 }
@@ -119,6 +113,9 @@ a:hover {
     color: lightblue;
   }
 
+#gameText{
+    width: 80%;
+}
 
 .logintext {
     font-size: 30px;
@@ -126,16 +123,35 @@ a:hover {
 }
 
 .description{
-    border: 1px solid black;
-    padding: 2rem;
-    border-radius: 5px;
+
 }
 
 .blogcard{
-    width: 50%;
-    border: 2px solid black;
+    width: 60%;
     margin-bottom: 2rem;
     padding: 1rem;
-    border-radius: 15px;
+    border-radius: 0.3rem;
+    background-color: #009de1;
 }
 
+.blogcard a {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+}
+
+.blogcard p {
+    margin-bottom: 0px;
+    color: white;
+}
+
+button {
+    border: 0px;
+    padding: 0.7rem;
+}
+
+.blogbutton {
+    width: 5rem;
+    border: 0px;
+    padding: 0.7rem;
+}
