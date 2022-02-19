@@ -2,20 +2,26 @@
 
 {% block header %}
     <div>
-        <h1>UNICEF Brebeuf</h1>
+        <a class="homelink" href="/">UNICEF Brebeuf</a>
     </div>
     <nav>
-        <a href="game.html">Game</a>
-        <a href="/blog">Blog</a>
         <a href="/blog/unicef">UNICEF</a>
+        <a href="/blog" class="navigation">Blog</a>
+        <a href="/blog/submit" class="navigation">Write a blog</a>
     </nav>
+    <div class="loginnav">
+        <a href="/auth/register" class="auth">Register</a>
+        <a href="/auth/login" class="auth">Login</a>
+    </div>
 {% endblock %}
 
 {% block content %}
 <div class="bloglistings">
     {% for post in g.posts %}
-        <a href={{"/blog/"+post["id"]}}>{{ post["title"] }}</a>
-        <p>{{ post["description"] }}</p>
+        {% if post %}
+           <a href={{"/blog/"+post["id"]}}>{{ post["title"] }}</a>
+           <p>{{ post["description"] }}</p>
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
