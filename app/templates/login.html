@@ -17,10 +17,14 @@
 
 {% block content %}
     <form method="post">
-        <label for="username">Username</label>
-        <input name="user" id="username" required>
-        <label for="password">Password</label>
-        <input type="password" name="pass" id="password" required>
+        <div>
+            <label for="username" class="logintext">Username</label>
+            <input name="user" id="username" required>
+        </div>
+        <div>
+            <label for="password" class="logintext">Password</label>
+            <input type="password" name="pass" id="password" required>
+        </div>
         <input type="submit" value="Log In">
     </form>
 {% endblock %}

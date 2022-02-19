@@ -88,7 +88,7 @@ main {
 }
 
 .loginnav {
-    margin-left: 65%;
+    margin-left: 63%;
     float: right;
     display: flex;
     flex-direction: row;
@@ -122,3 +122,23 @@ a:hover {
 #gameText{
     width: 80%;
 }
+
+.logintext {
+    font-size: 30px;
+    margin-bottom: 2rem;
+}
+
+.description{
+    border: 1px solid black;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+.blogcard{
+    width: 50%;
+    border: 2px solid black;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
