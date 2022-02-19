@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, g
 
 
 def create_app(test_config=None):
@@ -19,4 +19,5 @@ def create_app(test_config=None):
     from . import blog_system
     app.register_blueprint(blog_system.bp)
 
+    app.debug = True
     return app
