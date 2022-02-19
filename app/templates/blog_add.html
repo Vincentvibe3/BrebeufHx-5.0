@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <div>
+        <h1>UNICEF Brebeuf</h1>
+    </div>
+    <nav>
+        <a href="game.html">Game</a>
+        <a href="/blog">Blog</a>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <form class="bloginput" method="post">
+        <textarea name="titleinput" class="titleinput" ></textarea>
+        <textarea name="textinput" class="textinput" ></textarea>
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}

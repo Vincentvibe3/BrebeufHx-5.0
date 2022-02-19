@@ -16,5 +16,8 @@ def create_app(test_config=None):
     
     from . import routes
     app.register_blueprint(routes.bp)
+    from . import blog_system
+    app.register_blueprint(blog_system.bp)
+
     app.debug = True
     return app

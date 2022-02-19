@@ -1,3 +1,8 @@
+from flask import (
+    Blueprint, current_app, redirect, render_template, send_from_directory, url_for
+)
+
+bp = Blueprint('index', __name__, url_prefix='/')
 import json
 
 from argon2.exceptions import VerifyMismatchError
@@ -60,5 +65,4 @@ def register():
 
 @bp.route("", methods=["GET"])
 def index():
-    name = request.cookies.get('userID')
-    return "<h1>MAIN PAGE<h1>"
+    return current_app.send_static_file('index.html')
