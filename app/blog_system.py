@@ -24,7 +24,7 @@ def index():
 
 @bp.route("/submit", methods=["GET", "POST"])
 def submit():
-    if request.cookies.get("userID") not in session_cache.sessions:
+    if request.cookies.get("userID") not in sessions:
         return redirect("/auth/login")
     if request.method == "GET":
         return render_template("blog_add.html")
