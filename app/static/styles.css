@@ -50,6 +50,25 @@ main {
     height: 20rem;
     resize: none;
     font-family: inherit;
+    border: 1px solid;
+    border-radius: 25px;
+    padding: 15px;
+    margin-bottom: 1rem;
+}
+
+.blogbutton{
+    background-color: rgb(202, 255, 202);
+    border-radius: 5px;
+    border: 1px solid
+}
+
+.titleinput{
+    position: relative;
+    border: 3px solid;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 1rem
+    
 }
 
 .bloginput {
@@ -67,3 +86,35 @@ main {
     display: flex;
     flex-direction: column;
 }
+
+.loginnav {
+    margin-left: 65%;
+    float: right;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.auth {
+    margin-left: 1rem;
+    color: white;
+    text-decoration: none;
+}
+
+.blogtitle{
+    margin-bottom: 1rem;
+}
+
+.homelink{
+    font-size: 30px;
+    color: white;
+    text-decoration: none;
+}
+
+.navigation{
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    color: lightblue;
+  }
