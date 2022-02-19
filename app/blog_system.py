@@ -5,6 +5,7 @@ from flask import (
 import time
 import json
 import markdown
+from session_cache import sessions
 
 bp = Blueprint('blog', __name__, url_prefix='/blog')
 
