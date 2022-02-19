@@ -1,52 +1,41 @@
 
 var canvas = document.getElementById("gameCanvas")
 var canvasctx = canvas.getContext("2d");
-
+let typing = false;
+let text
+let pos = 0
+let textField = document.getElementById("gameText")
 let animationFrame = 0
 let animation = 1
 let scenariodata = [
     {
         "framecount":[10, 6, 8, 8, 7],
         "animationcount":5,
-        "script":``
+        "script":`abcs`
     },
     {
         "framecount":[4, 8, 8, 8, 8, 8, 8],
-        "animationcount":7
+        "animationcount":7,
+        "script":`abcd`
     }
 ]
 let scenario = 1
 let draw = false
 
-// function setupTypeWrite() {
-//     pos = 0;
-//     typingSpeed = 1;
-//     entryContent = document.getElementById(id);
-//     text = entryContent.innerHTML.replace(/\s+/g, ' ');
-//     buffer = text;
-//     entryContent.innerHTML = '';
-//     typing = true;
-// }
+function setupTypeWrite(scene) {
+    pos = 0;
+    text = scenariodata[scene-1]["script"];
+    textField.innerHTML = '';
+    typing = true;
+}
 
-// function typeWrite() {
-//     if (pos < text.length && typing) {
-//       if (text.charAt(pos) == '<') {
-//         tagOpen = true;
-//       }
-  
-//       if (!tagOpen) {
-//         entryContent.innerHTML += text.charAt(pos);
-//       }
-  
-//       if (text.charAt(pos) == '>') {
-//         tagOpen = false;
-//         entryContent.insertAdjacentHTML('beforeend', '<br>');
-//       }
-  
-//       pos++;
-//       setTimeout(typeWrite, 25);
-//     }
-//   }
+function typeWrite() {
+    if (pos < text.length && typing) {
+        textField.innerHTML += text.charAt(pos)
+        pos++;
+        setTimeout(typeWrite, 25);
+    }
+}
 
 function start() {
     draw = false
@@ -56,7 +45,6 @@ function start() {
 function renderBackground(){
     let img = new Image()
     img.src = `/static/scene_${scenario}/background.png`
-    console.log(img)
     img.onload = () => {
         canvasctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height)
     }
@@ -64,11 +52,8 @@ function renderBackground(){
 
 async function renderAnimation(timestamp){
     renderBackground()
-    console.log(animationFrame)
-    console.log(timestamp)
     let img = new Image()
     img.src = `/static/scene_${scenario}/Animation_${animation}_${animationFrame}.png`
-    console.log(img)
     img.onload = () => {
         canvasctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height)
     }
@@ -87,10 +72,14 @@ async function renderAnimation(timestamp){
 }
 
 async function render(){
-    draw = true
-    while (draw){
-        window.requestAnimationFrame(renderAnimation);
-        await new Promise(r => setTimeout(r, 200));
+    if (!draw){
+        draw = true
+        typing = true
+        typeWrite()
+        while (draw){
+            window.requestAnimationFrame(renderAnimation);
+            await new Promise(r => setTimeout(r, 200));
+        }
     }
 }
 
@@ -100,6 +89,8 @@ async function setScenario1(){
     animation = 1
     console.log(scenario)
     start()
+    typing = false
+    setupTypeWrite(1)
 }
 
 async function setScenario2(){
@@ -108,9 +99,12 @@ async function setScenario2(){
     animation = 1
     console.log(scenario)
     start()
+    typing = false
+    setupTypeWrite(2)
 }
 
 document.getElementById("gameCanvas").addEventListener("click", render)
 document.getElementById("scenario1button").addEventListener("click", setScenario1)
 document.getElementById("scenario2button").addEventListener("click", setScenario2)
 start()
+setupTypeWrite(1)
