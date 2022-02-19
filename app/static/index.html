@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <script src="game.js" defer></script>
+        <script src="static/game.js" defer></script>
         <title>
             UNICEF Brebeuf
         </title>
@@ -23,24 +23,12 @@
             </div>
         </header>
         <main>
-            <p>
-                Lorem ipsum description stuff GO UNICEF YES ESY EYS YEYS YEYS YES
-            </p>
-            <div>
-                game area
-                <div id="start_page">
-                <button id="Start_button">click my ass</button>
-                    <img src="static/dontask.jpg" id="start_page_image">
-                    <p id="start">
-                        lorem ipsum
-                    </p>
-                </div>
-                <div id="navigation_buttons">
-                    <button id="up">Up</button>
-                    <button id="down">Down</button>
-                    <button id="left">Left</button>
-                    <button id="right">right</button>
-                </div>
+            <div class="gameArea">
+                <canvas id="gameCanvas" width="1500" height="192"></canvas>
+                <p>Press on the image to start</p>
+                <button id="scenario1button">scenario 1</button>
+                <button id="scenario2button">scenario 2</button>
+                <p id="gameText"></p>
             </div>
         </main>
     </body>
