@@ -11,9 +11,9 @@
 {% endblock %}
 
 {% block content %}
-    <form class="bloginput" method="post">
-        <textarea name="titleinput" class="titleinput" ></textarea>
-        <textarea name="textinput" class="textinput" ></textarea>
-        <input type="submit" value="Register">
-    </form>
+<div class="bloglistings">
+    {% for post in g.posts %}
+        <a href={{"/blog/"+post["id"]}}>{{ post["title"] }}</div>
+    {% endfor %}
+</div>
 {% endblock %}
