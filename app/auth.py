@@ -19,11 +19,13 @@ from werkzeug.utils import redirect
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 hasher = PasswordHasher()
 
+
 def genSessionId():
     tokenbytes = secrets.token_bytes(32)
     b64 = base64.b64encode(tokenbytes)
     token = b64.decode("utf-8")
     return urllib.parse.quote(token)
+
 
 @bp.route("/login", methods=["POST", "GET"])
 def login():
@@ -83,4 +85,3 @@ def register():
         if request.cookies.get("userID") in session_cache.sessions:
             return redirect("/blog/submit")
         return render_template("login.html")
-

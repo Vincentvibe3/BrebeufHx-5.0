@@ -43,3 +43,7 @@ def submit():
             index.append({"title":title, "id":str(timestamp)})
             f.write(json.dumps(index, indent=4))
         return render_template("blog_success.html")
+
+@bp.route("/unicef", methods=["GET"])
+def unicef():
+    return render_template("unicef.html")
