@@ -4,6 +4,8 @@ from flask import (
 )
 import urllib
 
+from . import session_cache
+
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 from .session_cache import sessions
@@ -26,6 +28,7 @@ def genSessionId():
 @bp.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
+
         try:
             form_user = request.form["user"]
             form_pass = request.form["pass"]
@@ -49,6 +52,8 @@ def login():
             return resp  # Redirect to initial location?
 
     else:
+        if request.cookies.get("userID") in session_cache.sessions:
+            return redirect("/blog/submit")
         return render_template("login.html")
 
 
@@ -76,3 +81,7 @@ def register():
         return resp  # Redirect to initial location + No errors
     else:
         return render_template("login.html")
+
+@bp.route("/cookie", methods=["POST", "GET"])
+def cookie():
+    return request.cookies.get("userID")

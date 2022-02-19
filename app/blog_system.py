@@ -5,7 +5,8 @@ from flask import (
 import time
 import json
 import markdown
-from session_cache import sessions
+
+from app import session_cache
 
 bp = Blueprint('blog', __name__, url_prefix='/blog')
 
@@ -19,12 +20,15 @@ def blog(blog):
 @bp.route("/", methods=["GET"])
 def index():
     print("list")
+
     with open(f"app/content/index.json", "r") as blogtext:
         g.posts = json.loads(blogtext.read())
     return render_template("blog_list.html")
 
 @bp.route("/submit", methods=["GET", "POST"])
 def submit():
+    if request.cookies.get("userID") not in session_cache.sessions:
+        return redirect("/auth/login")
     if request.method == "GET":
         return render_template("blog_add.html")
     elif request.method == "POST":
