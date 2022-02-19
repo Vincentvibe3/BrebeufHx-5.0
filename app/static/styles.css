@@ -118,3 +118,7 @@ main {
 a:hover {
     color: lightblue;
   }
+
+#gameText{
+    width: 80%;
+}

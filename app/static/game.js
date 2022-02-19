@@ -4,6 +4,7 @@ var canvasctx = canvas.getContext("2d");
 let typing = false;
 let text
 let pos = 0
+let tagOpen = false
 let textField = document.getElementById("gameText")
 let animationFrame = 0
 let animation = 1
@@ -11,7 +12,13 @@ let scenariodata = [
     {
         "framecount":[10, 6, 8, 8, 7],
         "animationcount":5,
-        "script":`abcs`
+        "script":`"This is Arieful.<br>
+        Arieful's family is very poor.<br>
+        At the age of 7, he had to work in the fields of plantation company to help his family survive.<br>
+        His family can't afford school.<br>
+        Arieful has to work up to 16 hours every day for less than 2$.<br>
+        In the world's poorest countries, slightly more than 1 in 5 children are engaged in work that is potentially harmful to their health.<br>
+        - UNICEF, August 2021`
     },
     {
         "framecount":[4, 8, 8, 8, 8, 8, 8],
@@ -31,7 +38,18 @@ function setupTypeWrite(scene) {
 
 function typeWrite() {
     if (pos < text.length && typing) {
-        textField.innerHTML += text.charAt(pos)
+        if (text.charAt(pos) == '<') {
+            tagOpen = true;
+          }
+      
+          if (!tagOpen) {
+            textField.innerHTML += text.charAt(pos);
+          }
+      
+          if (text.charAt(pos) == '>') {
+            tagOpen = false;
+            textField.insertAdjacentHTML('beforeend', '<br>');
+          }
         pos++;
         setTimeout(typeWrite, 25);
     }
