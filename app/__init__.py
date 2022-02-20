@@ -20,6 +20,4 @@ def create_app(test_config=None):
     app.register_blueprint(blog_system.bp)
     from . import auth
     app.register_blueprint(auth.bp)
-
-    app.debug = True
     return app
